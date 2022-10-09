@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container jumbotron">
+        <h2>Chuyển dữ liệu từ JSON string, vào object</h2>
+        <p id="p-json-person-john"></p>
+        <h3>Dữ liệu người dùng: Lisa</h3>
+        <p id="p-json-person-lisa"></p>
+    </div>
+</body>
+
+<script>
+    // code mẫu
+
+    // 1.định nghĩa JSON string
+    var gJohnJSONPersonString = `{"name":"John Doe", "age":31, "city":"New York","cars":[ "Ford", "BMW", "Fiat"] }`;
+
+    // 2.parsing, chuyển JSON string thành Object
+    var gPersonJohn = JSON.parse(gJohnJSONPersonString);
+
+    //3. viết  car số 0  ra web
+    var gElementJsonPersonJohn = document.getElementById("p-json-person-john");
+    gElementJsonPersonJohn.innerHTML = "John first car: " + gPersonJohn.cars[0];
+    debugger;
+</script>
+
+<script>
+    // hãy viết code của bạn cho Lisa
+    //  name: Lisa Moore
+    //  age: 23
+    //  city: Atlanta
+    //  cars của Lisa sẽ có 02 thuộc tính, brand và vid  như sau
+    //       brand: Ford, vid: VA-203911
+    // 		 brand: Mercedes, vid: MA-82382
+    //       brand: Honda, vid: GG-32953
+    // định nghĩa JSON string 
+    var gLisaJSONString = `{"name":"Lisa",
+    "age":23,
+    "city":"Atlanta",
+    "cars":[{"brand":"Ford", "vid":"VA-203911"},
+            {"brand":"Mercedes", "vid":"MA-82382"}, 
+            {"brand":"Honda", "vid":"GG-32953"}]}`;
+    // Chuyển JSON string thành Object
+    var gLisaObject = JSON.parse(gLisaJSONString); 
+    // Ghi ra thông tin trên web
+    var gLisaElement = document.getElementById("p-json-person-lisa");
+    var gLisaInner = ""; 
+    gLisaInner = gLisaInner + "Tên: " + gLisaObject.name + "<br/>"; 
+    gLisaInner = gLisaInner + "Tuổi: " + gLisaObject.age + "<br/>"; 
+    gLisaInner = gLisaInner + "Thành phố: " + gLisaObject.city + "<br/>";
+    var cnt = 1; 
+    for(var key in gLisaObject.cars) {
+        gLisaInner = gLisaInner + "Xe thứ " + (cnt) + ": " + "Thương hiệu là "; 
+        gLisaInner = gLisaInner + gLisaObject.cars[key].brand + ", biển số: " + gLisaObject.cars[key].vid; 
+        gLisaInner += "<br/>";  
+        cnt++; 
+    }
+
+
+    gLisaElement.innerHTML = gLisaInner; 
+</script>
+</html>
